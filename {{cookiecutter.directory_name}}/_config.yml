@@ -1,0 +1,1 @@
+theme: {{ cookiecutter.gh_pages_theme }}

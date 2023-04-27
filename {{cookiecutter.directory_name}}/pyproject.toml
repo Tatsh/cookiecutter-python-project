@@ -1,0 +1,35 @@
+[tool.poetry]
+name = "{{cookiecutter.directory_name}}"
+version = "0.0.1"
+authors = {{ cookiecutter.authors.list | jsonify }}
+description = "{{cookiecutter.description}}"
+license = "MIT"
+packages = [{ include = "{{cookiecutter.module_name}}" }]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.10,<4"
+
+[tool.poetry.group.dev]
+optional = true
+
+[tool.poetry.group.dev.dependencies]
+
+[tool.poetry.group.docs]
+optional = true
+
+[tool.poetry.group.docs.dependencies]
+
+[tool.poetry.group.test]
+optional = true
+
+[tool.poetry.group.test.dependencies]
+
+[build-system]
+build-backend = "poetry.core.masonry.api"
+requires = ["poetry-core"]
+{% if cookiecutter.want_main %}
+
+[tool.poetry.scripts]
+{{ cookiecutter.main_cli_name }} = "{{ cookiecutter.module_name }}:main"
+{% endif %}

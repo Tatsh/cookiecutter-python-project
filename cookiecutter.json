@@ -1,0 +1,22 @@
+{
+    "authors": {
+        "list": [
+            "Andrew Udvare <audvare@gmail.com>"
+        ]
+    },
+    "description": "Short description of project for PyPI etc.",
+    "directory_name": "cool-project",
+    "docs_theme": "alabaster",
+    "gh_pages_theme": "jekyll-theme-midnight",
+    "github_username": "Tatsh",
+    "human_project_name": "Human-Readable Project Name",
+    "main_cli_name": "{{ cookiecutter.directory_name }}",
+    "module_name": "{{ cookiecutter.directory_name|replace('-', '_') }}",
+    "readme": {
+        "description": "{{ cookiecutter.description }}"
+    },
+    "repository_name": "{{cookiecutter.directory_name}}",
+    "want_main": true,
+    "want_requests": true,
+    "year": "{% now 'utc', '%Y' %}"
+}

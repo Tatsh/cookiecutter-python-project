@@ -1,0 +1,37 @@
+---
+name: Tests
+jobs:
+  test:
+    env:
+      GITHUB_TOKEN: {% raw %}${{ secrets.GITHUB_TOKEN }}{% endraw %}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install poetry
+        run: pipx install poetry
+      - name: set up Python {% raw %}${{ matrix.python-version }}{% endraw %}
+        uses: actions/setup-python@v4
+        with:
+          python-version: {% raw %}${{ matrix.python-version }}{% endraw %}
+          cache: poetry
+      - name: Install dependencies
+        run: poetry install --with=testing
+      - name: Run tests
+        run: poetry run pytest --cov={{cookiecutter.module_name}} --cov-branch
+      - env:
+          GITHUB_TOKEN: {% raw %}${{ secrets.GITHUB_TOKEN }}{% endraw %}
+        if: matrix.python-version == 3.10
+        name: Coveralls
+        run: poetry run coveralls --service=github
+    strategy:
+      matrix:
+        python-version:
+          - '3.10'
+          - '3.11'
+'on':
+  pull_request:
+    branches:
+      - develop
+  push:
+    branches:
+      - develop
