@@ -9,7 +9,7 @@ REPO_URI = 'git@github.com:{{ cookiecutter.github_username }}/{{ cookiecutter.di
 module_name = '{{ cookiecutter.module_name }}'
 want_main = {{cookiecutter.want_main}}
 packages = ('loguru', )
-dev_packages = ('mypy', 'pylint', 'pylint-quotes', 'rope', 'toml')
+dev_packages = ('mypy', 'pylint', 'pylint-quotes', 'rope', 'toml', 'yapf')
 docs_packages = ('sphinx', )
 test_packages = ('coveralls', 'mock', 'pytest', 'pytest-mock')
 git_command_args = (('init', ), ('add', '.'),
@@ -36,6 +36,7 @@ poetry_add_command_args = (packages, ('-G', 'dev') + dev_packages,
                            ('-G', 'test') + test_packages)
 for args in poetry_add_command_args:
     sp.run(('poetry', 'add') + args, check=True)
+sp.run(('poetry', 'install', '--with=dev', '--with=docs', '--with=test'), check=True)
 for args in yarn_command_args:
     sp.run(('yarn', ) + args, check=True)
 for args in git_command_args:
