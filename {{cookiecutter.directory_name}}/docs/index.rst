@@ -1,5 +1,5 @@
-Welcome to {{ cookiecutter.human_project_name }}'s documentation!
-=======================================================
+{{ cookiecutter.human_project_name }}
+=====================================
 .. automodule:: {{ cookiecutter.module_name }}.name_of_module
    :members:
 
