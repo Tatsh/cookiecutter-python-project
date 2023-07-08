@@ -27,6 +27,7 @@ distutils
 docstrings
 ecda
 epub
+epub
 excinfo
 execfile
 flabel
@@ -57,6 +58,7 @@ msvs
 multirpc
 mutators
 mypy
+mypy
 needmessage
 netrc
 nistp
@@ -76,6 +78,7 @@ prss
 pstate
 ptrackers
 pylint
+pytest
 pytest
 ratelimit
 ratelimit

@@ -23,7 +23,7 @@ if not re.match(MODULE_REGEX, module_name):
           file=sys.stderr)
     sys.exit(1)
 if want_main:
-    packages += ('click', )
+    packages += ('click>=8.1.3,<8.1.4', )
 else:
     main_py = Path(module_name) / 'main.py'
     main_py.unlink()
@@ -33,10 +33,10 @@ if {{cookiecutter.want_requests}}:
     test_packages += ('requests-mock', )
 poetry_add_command_args = (packages, ('-G', 'dev') + dev_packages,
                            ('-G', 'docs') + docs_packages,
-                           ('-G', 'test') + test_packages)
+                           ('-G', 'tests') + test_packages)
 for args in poetry_add_command_args:
     sp.run(('poetry', 'add') + args, check=True)
-sp.run(('poetry', 'install', '--with=dev', '--with=docs', '--with=test'), check=True)
+sp.run(('poetry', 'install', '--with=dev', '--with=docs', '--with=tests'), check=True)
 for args in yarn_command_args:
     sp.run(('yarn', ) + args, check=True)
 for args in git_command_args:

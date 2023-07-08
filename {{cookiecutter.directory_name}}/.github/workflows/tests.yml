@@ -1,5 +1,4 @@
 ---
-name: Tests
 jobs:
   test:
     env:
@@ -7,20 +6,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Install poetry
+      - name: Install Poetry
         run: pipx install poetry
-      - name: set up Python {% raw %}${{ matrix.python-version }}{% endraw %}
+      - name: Set up Python {% raw %}${{ matrix.python-version }}{% endraw %}
         uses: actions/setup-python@v4
         with:
-          python-version: {% raw %}${{ matrix.python-version }}{% endraw %}
           cache: poetry
-      - name: Install dependencies
-        run: poetry install --with=testing
+          python-version: {% raw %}${{ matrix.python-version }}{% endraw %}
+      - name: Install dependencies (Poetry)
+        run: poetry install --with=dev --with=tests
+      - name: Install dependencies (Yarn)
+        run: yarn
       - name: Run tests
-        run: poetry run pytest --cov={{cookiecutter.module_name}} --cov-branch
-      - env:
-          GITHUB_TOKEN: {% raw %}${{ secrets.GITHUB_TOKEN }}{% endraw %}
-        if: matrix.python-version == 3.10
+        run: yarn test
+      - if: matrix.python-version == 3.11
         name: Coveralls
         run: poetry run coveralls --service=github
     strategy:
@@ -28,10 +27,11 @@ jobs:
         python-version:
           - '3.10'
           - '3.11'
+name: Tests
 'on':
   pull_request:
     branches:
-      - develop
+      - master
   push:
     branches:
-      - develop
+      - master
