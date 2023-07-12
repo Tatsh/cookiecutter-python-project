@@ -93,6 +93,7 @@ postprocessors
 prss
 pstate
 ptrackers
+pycache
 pylance
 pylint
 pyproject

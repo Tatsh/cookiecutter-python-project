@@ -61,7 +61,7 @@
   ],
   "ignorePaths": [
     "*.log",
-    "./**/.vscode/extensions.json",
+    ".vscode/extensions.json",
     ".coverage",
     ".directory",
     ".git",
