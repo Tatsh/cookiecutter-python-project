@@ -18,6 +18,7 @@ colwidth
 concat
 contextlib
 contextmanager
+cookiecutter
 cookiesfrombrowser
 dedented
 delslice
@@ -27,6 +28,7 @@ docstrings
 ecda
 epub
 esbenp
+esbonio
 excinfo
 execfile
 flabel

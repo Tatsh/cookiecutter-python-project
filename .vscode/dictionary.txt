@@ -30,10 +30,12 @@ docutils
 doxdocgen
 ecda
 elif
+endraw
 endregion
 epub
 esbenp
 esbonio
+etuptools
 excinfo
 execfile
 flabel
@@ -111,7 +113,6 @@ selfpromo
 setenv
 setsettings
 setslice
-setuptools
 shellcheck
 shortcode
 signoff

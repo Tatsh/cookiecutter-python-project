@@ -63,7 +63,7 @@
     ".coverage",
     ".directory",
     ".git",
-    ".vscode/extensions.json",
+    "./**/.vscode/extensions.json",
     "__pycache__",
     "build/**",
     "dist/**",

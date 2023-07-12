@@ -12,7 +12,7 @@
   "repository": "git@github.com:Tatsh/cookiecutter-python-project.git",
   "scripts": {
     "check-formatting": "prettier -c './*.json' ./.prettierrc ./README.md ./pyproject.toml && poetry run isort hooks --check && poetry run yapf -rd hooks",
-    "check-spelling": "cspell --no-progress './**/*' './**/.*' './.*/**'",
+    "check-spelling": "cspell --no-progress .",
     "format": "prettier -w './*.json' ./.prettierrc ./README.md ./pyproject.toml && poetry run isort hooks && poetry run yapf -ri hooks",
     "mypy": "poetry run mypy hooks",
     "pylint": "poetry run pylint hooks",
