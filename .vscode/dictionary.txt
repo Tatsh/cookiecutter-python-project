@@ -95,7 +95,6 @@ pstate
 ptrackers
 pylance
 pylint
-pylintrc
 pyproject
 pytest
 ratelimit
