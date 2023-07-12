@@ -27,7 +27,6 @@
     "**/*cookiecutter.directory_name*/**/*.y*ml": "jinja-yaml",
     "**/*cookiecutter.directory_name*/**/.*ignore": "jinja",
     "**/*cookiecutter.directory_name*/**/.prettierrc": "jinja-json",
-    "**/*cookiecutter.directory_name*/**/.pylintrc": "jinja",
     "**/hooks/*.py": "jinja-py"
   },
   "files.insertFinalNewline": true,

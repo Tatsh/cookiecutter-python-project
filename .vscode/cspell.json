@@ -59,8 +59,11 @@
     "yml"
   ],
   "ignorePaths": [
+    "*.log",
     ".coverage",
     ".directory",
+    ".git",
+    ".vscode/extensions.json",
     "build/**",
     "dist/**",
     "htmlcov/**"

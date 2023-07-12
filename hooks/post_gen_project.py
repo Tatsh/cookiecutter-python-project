@@ -1,3 +1,4 @@
+# pylint: disable=using-constant-test,unhashable-member,undefined-variable
 from pathlib import Path
 import re
 import subprocess as sp
@@ -5,39 +6,39 @@ import sys
 
 MODULE_REGEX = r'^[_a-zA-Z][_a-zA-Z0-9]+$'
 REPO_URI = 'git@github.com:{{ cookiecutter.github_username }}/{{ cookiecutter.directory_name }}.git'
+GIT_COMMAND_ARGS = (('init',), ('add', '.'), ('commit', '-m', 'Start of project', '--signoff'),
+                    ('remote', 'add', 'origin', REPO_URI))
+DOCS_PACKAGES = ('docutils', 'esbonio', 'sphinx')
+YARN_COMMAND_ARGS = (('add', '-D', 'cspell', 'prettier', 'prettier-plugin-toml'), ('format',))
 
-module_name = '{{ cookiecutter.module_name }}'
-want_main = {{cookiecutter.want_main}}
-packages = ('loguru', )
-dev_packages = ('mypy', 'pylint', 'pylint-quotes', 'rope', 'toml', 'yapf')
-docs_packages = ('sphinx', )
-test_packages = ('coveralls', 'mock', 'pytest', 'pytest-mock')
-git_command_args = (('init', ), ('add', '.'),
-                    ('commit', '-m', 'Start of project',
-                     '--signoff'), ('remote', 'add', 'origin', REPO_URI))
-yarn_command_args = (('add', '-D', 'cspell', 'prettier', 'prettier-plugin-ini',
-                      'prettier-plugin-toml'), ('format', ))
 
-if not re.match(MODULE_REGEX, module_name):
-    print(f'ERROR: {module_name} is not a valid Python module name!',
-          file=sys.stderr)
-    sys.exit(1)
-if want_main:
-    packages += ('click>=8.1.3,<8.1.4', )
-else:
-    main_py = Path(module_name) / 'main.py'
-    main_py.unlink()
-if {{cookiecutter.want_requests}}:
-    packages += ('requests', )
-    dev_packages += ('types-requests', )
-    test_packages += ('requests-mock', )
-poetry_add_command_args = (packages, ('-G', 'dev') + dev_packages,
-                           ('-G', 'docs') + docs_packages,
-                           ('-G', 'tests') + test_packages)
-for args in poetry_add_command_args:
-    sp.run(('poetry', 'add') + args, check=True)
-sp.run(('poetry', 'install', '--with=dev', '--with=docs', '--with=tests'), check=True)
-for args in yarn_command_args:
-    sp.run(('yarn', ) + args, check=True)
-for args in git_command_args:
-    sp.run(('git', ) + args, check=True)
+def main() -> int:
+    module_name = '{{ cookiecutter.module_name }}'
+    if not re.match(MODULE_REGEX, module_name):
+        print(f'ERROR: {module_name} is not a valid Python module name!', file=sys.stderr)
+        return 1
+    packages: tuple[str, ...] = ('loguru',)
+    dev_packages: tuple[str, ...] = ('mypy', 'pylint', 'pylint-quotes', 'rope', 'toml', 'yapf')
+    test_packages: tuple[str, ...] = ('coveralls', 'mock', 'pytest', 'pytest-mock')
+    if {{cookiecutter.want_main}}:  # type: ignore[name-defined]
+        packages += ('click>=8.1.3,!=8.1.4',)
+    else:
+        main_py = Path(module_name) / 'main.py'
+        main_py.unlink()
+    if {{cookiecutter.want_requests}}:  # type: ignore[name-defined]
+        dev_packages += ('types-requests',)
+        packages += ('requests',)
+        test_packages += ('requests-mock',)
+    for args in (packages, ('-G', 'dev') + dev_packages, ('-G', 'docs') + DOCS_PACKAGES,
+                 ('-G', 'tests') + test_packages):
+        sp.run(('poetry', 'add') + args, check=True)
+    sp.run(('poetry', 'install', '--with=dev', '--with=docs', '--with=tests'), check=True)
+    for args in YARN_COMMAND_ARGS:
+        sp.run(('yarn',) + args, check=True)
+    for args in GIT_COMMAND_ARGS:
+        sp.run(('git',) + args, check=True)
+    return 0
+
+
+if __name__ == '__main__':
+    sys.exit(main())
