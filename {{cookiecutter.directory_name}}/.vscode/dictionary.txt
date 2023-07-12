@@ -71,6 +71,7 @@ paren
 parens
 parseable
 pipx
+pipx
 plabel
 popen
 postprocessors
