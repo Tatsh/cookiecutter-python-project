@@ -26,6 +26,7 @@ distutils
 docstrings
 ecda
 epub
+esbenp
 excinfo
 execfile
 flabel
@@ -67,6 +68,7 @@ outro
 outtmpl
 overgeneral
 paren
+parens
 parseable
 pipx
 plabel
@@ -75,9 +77,10 @@ postprocessors
 prss
 pstate
 ptrackers
+pycache
+pylance
 pylint
 pytest
-ratelimit
 ratelimit
 rcfile
 rdiv
