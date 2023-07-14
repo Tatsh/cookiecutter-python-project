@@ -61,12 +61,13 @@
   ],
   "ignorePaths": [
     "*.log",
-    ".vscode/extensions.json",
     ".coverage",
     ".directory",
     ".git",
-    ".mypy_cache/**",
+    ".mypy_cache",
+    ".vscode/extensions.json",
     "__pycache__",
+    "_build/**",
     "build/**",
     "dist/**",
     "htmlcov/**"

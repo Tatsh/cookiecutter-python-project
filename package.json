@@ -1,7 +1,8 @@
 {
-  "contributors": [],
+  "contributors": [
+    "Andrew Udvare <audvare@gmail.com>"
+  ],
   "devDependencies": {
-    "@prettier/plugin-xml": "^2.2.0",
     "cspell": "^6.31.1",
     "prettier": "^2.8.7",
     "prettier-plugin-ini": "^1.1.0",
@@ -9,12 +10,18 @@
   },
   "license": "MIT",
   "name": "cookiecutter-python-project",
+  "prettier": {
+    "endOfLine": "lf",
+    "iniSpaceAroundEquals": true,
+    "printWidth": 100,
+    "singleQuote": true
+  },
   "repository": "git@github.com:Tatsh/cookiecutter-python-project.git",
   "scripts": {
-    "check-formatting": "prettier -c './*.json' ./.prettierrc ./README.md ./pyproject.toml && poetry run isort hooks --check && poetry run yapf -rd hooks",
+    "check-formatting": "prettier -c './*.json' ./README.md ./pyproject.toml && poetry run isort hooks --check && poetry run yapf -rd hooks",
     "check-spelling": "cspell --no-progress .",
     "clean-dict": "r=(); while IFS=$\\n read -r w; do ! rg --no-config -qi. -g '!.vscode/dictionary.txt' -m 1 \"$w\" . && r+=(\"$w\"); done < ./.vscode/dictionary.txt; j=$(printf \"|%s\" \"${r[@]}\"); j=\"^(${j:1})$\"; grep -Ev \"${j}\" ./.vscode/dictionary.txt > new && mv new ./.vscode/dictionary.txt",
-    "format": "prettier -w './*.json' ./.prettierrc ./README.md ./pyproject.toml && poetry run isort hooks && poetry run yapf -ri hooks",
+    "format": "prettier -w './*.json' ./README.md ./pyproject.toml && poetry run isort hooks && poetry run yapf -ri hooks",
     "mypy": "poetry run mypy hooks",
     "pylint": "poetry run pylint hooks",
     "qa": "yarn mypy && yarn pylint && yarn check-spelling && yarn check-formatting",

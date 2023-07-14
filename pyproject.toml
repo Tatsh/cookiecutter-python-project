@@ -1,10 +1,10 @@
 [tool.poetry]
-name = "cookiecutter-python-project"
-version = "0.0.1"
-authors = []
-description = ""
+authors = ["Andrew Udvare <audvare@gmail.com>"]
+description = "My template."
 license = "MIT"
+name = "cookiecutter-python-project"
 readme = "README.md"
+version = "0.0.1"
 
 [tool.poetry.dependencies]
 python = ">=3.10,<4"

@@ -8,7 +8,7 @@ MODULE_REGEX = r'^[_a-zA-Z][_a-zA-Z0-9]+$'
 REPO_URI = 'git@github.com:{{ cookiecutter.github_username }}/{{ cookiecutter.directory_name }}.git'
 GIT_COMMAND_ARGS = (('init',), ('add', '.'), ('commit', '-m', 'Start of project', '--signoff'),
                     ('remote', 'add', 'origin', REPO_URI))
-DOCS_PACKAGES = ('docutils', 'esbonio', 'sphinx')
+
 YARN_COMMAND_ARGS = (('add', '-D', 'cspell', 'prettier', 'prettier-plugin-toml'), ('format',))
 
 
@@ -19,9 +19,11 @@ def main() -> int:
         return 1
     packages: tuple[str, ...] = ('loguru',)
     dev_packages: tuple[str, ...] = ('mypy', 'pylint', 'pylint-quotes', 'rope', 'toml', 'yapf')
+    docs_packages: tuple[str, ...] = ('docutils', 'esbonio', 'sphinx')
     test_packages: tuple[str, ...] = ('coveralls', 'mock', 'pytest', 'pytest-mock')
     if {{cookiecutter.want_main}}:  # type: ignore[name-defined]
         packages += ('click>=8.1.3,!=8.1.4',)
+        docs_packages += ('sphinx-click',)
     else:
         main_py = Path(module_name) / 'main.py'
         main_py.unlink()
@@ -29,7 +31,7 @@ def main() -> int:
         dev_packages += ('types-requests',)
         packages += ('requests',)
         test_packages += ('requests-mock',)
-    for args in (packages, ('-G', 'dev') + dev_packages, ('-G', 'docs') + DOCS_PACKAGES,
+    for args in (packages, ('-G', 'dev') + dev_packages, ('-G', 'docs') + docs_packages,
                  ('-G', 'tests') + test_packages):
         sp.run(('poetry', 'add') + args, check=True)
     sp.run(('poetry', 'install', '--with=dev', '--with=docs', '--with=tests'), check=True)

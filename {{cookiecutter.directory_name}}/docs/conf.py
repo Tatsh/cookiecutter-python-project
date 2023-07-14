@@ -1,11 +1,18 @@
-# pylint: disable=invalid-name,redefined-builtin,unused-variable
+# pylint: disable=redefined-builtin,invalid-name
 """
 Configuration file for the Sphinx documentation builder.
 https://www.sphinx-doc.org/en/master/usage/configuration.html
 """
+from datetime import datetime
+from os.path import dirname
 from typing import Final, Sequence
 import os
 import sys
+
+import toml
+
+with open(f'{dirname(__file__)}/../pyproject.toml') as f:
+    PROJECT = toml.load(f)
 
 # region Path setup
 # If extensions (or modules to document with autodoc) are in another directory,
@@ -14,18 +21,18 @@ import sys
 sys.path.insert(0, os.path.abspath('..'))
 # endregion
 
-author: Final[str] = '{{ cookiecutter.authors.list[0] }}'
-copyright: Final[str] = '{{ cookiecutter.year }}'
-project: Final[str] = '{{ cookiecutter.human_project_name }}'
+author: Final[str] = PROJECT['tool']['poetry']['authors'][0]
+copyright: Final[str] = str(datetime.now().year)
+project: Final[str] = PROJECT['tool']['poetry']['name']
 '''The short X.Y version.'''
-version: Final[str] = '0.0.1'
+version: Final[str] = PROJECT['tool']['poetry']['version']
 '''The full version, including alpha/beta/rc tags.'''
 release: Final[str] = f'v{version}'
 '''
 Add any Sphinx extension module names here, as strings. They can be extensions
 coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
 '''
-extensions: Final[Sequence[str]] = ['sphinx.ext.autodoc', 'sphinx.ext.napoleon']
+extensions: Final[Sequence[str]] = ['sphinx.ext.autodoc', 'sphinx.ext.napoleon'{%if want_main%}, "sphinx_click"{%endif%}]
 '''Add any paths that contain templates here, relative to this directory.'''
 templates_path: Final[Sequence[str]] = ['_templates']
 '''
@@ -40,9 +47,9 @@ Add any paths that contain custom static files (such as style sheets) here,
 relative to this directory. They are copied after the builtin static files, so
 a file named "default.css" will overwrite the builtin "default.css".
 '''
-html_static_path: Final[Sequence[str]] = ['_static']
+html_static_path: Final[Sequence[str]] = []
 '''
 The theme to use for HTML and HTML Help pages.  See the documentation for a
 list of builtin themes.
 '''
-html_theme: Final[str] = '{{cookiecutter.docs_theme}}'
+html_theme: Final[str] = 'alabaster'
