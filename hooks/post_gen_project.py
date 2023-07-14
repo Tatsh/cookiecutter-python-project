@@ -9,8 +9,8 @@ REPO_URI = 'git@github.com:{{ cookiecutter.github_username }}/{{ cookiecutter.di
 GIT_COMMAND_ARGS = (('init',), ('add', '.'), ('commit', '-m', 'Start of project', '--signoff'),
                     ('remote', 'add', 'origin', REPO_URI))
 
-YARN_COMMAND_ARGS = (('add', '-D', 'cspell', 'markdownlint-cli2', 'prettier', 'prettier-plugin-ini',
-                      'prettier-plugin-sort-json', 'prettier-plugin-toml'), ('format',))
+YARN_COMMAND_ARGS = (('add', '-D', 'cspell', 'markdownlint-cli2', 'prettier-plugin-sort-json',
+                      'prettier-plugin-toml'), ('format',))
 
 
 def main() -> int:

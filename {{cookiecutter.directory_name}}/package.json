@@ -1,5 +1,9 @@
 {
   "contributors": {{ cookiecutter.authors.list|jsonify }},
+  "devDependencies": {
+    "prettier": "^2.8.7",
+    "prettier-plugin-ini": "^1.1.0"
+  },
   "license": "MIT",
   "name": "{{ cookiecutter.directory_name }}",
   "prettier": {
