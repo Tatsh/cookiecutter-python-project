@@ -63,6 +63,7 @@ levelname
 levelno
 loguru
 lunchy
+markdownlint
 maxdepth
 metaclass
 modindex
