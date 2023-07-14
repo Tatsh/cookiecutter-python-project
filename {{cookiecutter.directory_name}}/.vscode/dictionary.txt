@@ -24,8 +24,12 @@ dedented
 delslice
 dets
 distutils
+docparams
 docstrings
+docutils
 ecda
+elif
+endregion
 epub
 esbenp
 esbonio
@@ -35,6 +39,7 @@ flabel
 fstr
 fullrows
 genindex
+getabsfile
 getslice
 hsplit
 htmlcov
@@ -62,6 +67,7 @@ mypy
 needmessage
 netrc
 nistp
+numpy
 objectdb
 offtopic
 oneshot
@@ -75,6 +81,7 @@ parseable
 pipx
 pipx
 plabel
+pluggy
 popen
 postprocessors
 prss
