@@ -20,7 +20,7 @@ def main() -> int:
         return 1
     packages: tuple[str, ...] = ('loguru',)
     dev_packages: tuple[str, ...] = ('mypy', 'pylint', 'pylint-quotes', 'rope', 'toml', 'yapf')
-    docs_packages: tuple[str, ...] = ('docutils', 'esbonio', 'sphinx')
+    docs_packages: tuple[str, ...] = ('docutils', 'esbonio', 'sphinx', 'toml')
     test_packages: tuple[str, ...] = ('coveralls', 'mock', 'pytest', 'pytest-mock')
     if {{cookiecutter.want_main}}:  # type: ignore[name-defined]
         packages += ('click>=8.1.3,!=8.1.4',)
