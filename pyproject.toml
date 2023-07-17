@@ -3,6 +3,7 @@ authors = ["Andrew Udvare <audvare@gmail.com>"]
 description = "My template."
 license = "MIT"
 name = "cookiecutter-python-project"
+packages = [{ include = "check_project.py" }]
 readme = "README.md"
 version = "0.0.1"
 
@@ -13,13 +14,17 @@ python = ">=3.10,<4"
 optional = true
 
 [tool.poetry.group.dev.dependencies]
+click = "^8.1.5"
+deepdiff = "^6.3.1"
 mypy = "^1.4.1"
 pylint = "^2.16.2"
 pylint-quotes = "^0.2.3"
 rope = "^1.7.0"
+toml = "^0.10.2"
 types-requests = "^2.28.11.14"
 typing-extensions = "^4.5.0"
 yapf = ">=0.33,<0.41"
+types-toml = "^0.10.8.6"
 
 [tool.poetry.group.docs]
 optional = true
@@ -32,6 +37,9 @@ sphinx = "^7.0.1"
 [build-system]
 build-backend = "poetry.core.masonry.api"
 requires = ["poetry-core"]
+
+[tool.poetry.scripts]
+check-project = "check_project:main"
 
 [tool.isort]
 case_sensitive = true
@@ -47,6 +55,7 @@ disallow_untyped_calls = true
 disallow_untyped_defs = true
 disallow_untyped_decorators = true
 disallow_subclassing_any = true
+mypy_path = "./.stubs"
 show_column_numbers = true
 show_error_codes = true
 strict_equality = true
@@ -97,10 +106,12 @@ logging-modules = ["logging", "loguru"]
 
 [tool.pylint."messages control"]
 disable = [
+  "fixme",
   "magic-value-comparison",
   "missing-class-docstring",
   "missing-function-docstring",
   "missing-module-docstring",
+  "too-many-branches",
   "too-many-instance-attributes",
   "unspecified-encoding",
   "use-dict-literal"

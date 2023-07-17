@@ -21,6 +21,7 @@ contextmanager
 cookiecutter
 cookiesfrombrowser
 dedented
+deepdiff
 delslice
 dets
 distutils
@@ -97,6 +98,7 @@ ptrackers
 pycache
 pylance
 pylint
+pylintrc
 pyproject
 pytest
 ratelimit
@@ -146,6 +148,7 @@ valign
 virtualenvs
 vsplit
 webui
+workdir
 writeautomaticsub
 writeinfojson
 writesubtitles

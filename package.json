@@ -20,12 +20,12 @@
   },
   "repository": "git@github.com:Tatsh/cookiecutter-python-project.git",
   "scripts": {
-    "check-formatting": "yarn prettier -c './*.json' ./README.md ./pyproject.toml && poetry run isort hooks --check && poetry run yapf -rd hooks",
+    "check-formatting": "yarn prettier -c './*.json' ./README.md ./pyproject.toml && poetry run isort check_project.py hooks --check && poetry run yapf -rd check_project.py hooks",
     "check-spelling": "cspell --no-progress .",
     "clean-dict": "r=(); while IFS=$\\n read -r w; do ! rg --no-config -qi. -g '!.vscode/dictionary.txt' -m 1 \"$w\" . && r+=(\"$w\"); done < ./.vscode/dictionary.txt; j=$(printf \"|%s\" \"${r[@]}\"); j=\"^(${j:1})$\"; grep -Ev \"${j}\" ./.vscode/dictionary.txt > new && mv new ./.vscode/dictionary.txt",
-    "format": "yarn prettier -w './*.json' ./README.md ./pyproject.toml && poetry run isort hooks && poetry run yapf -ri hooks",
-    "mypy": "poetry run mypy hooks",
-    "pylint": "poetry run pylint hooks",
+    "format": "yarn prettier -w './*.json' ./README.md ./pyproject.toml && poetry run isort check_project.py hooks && poetry run yapf -ri check_project.py hooks",
+    "mypy": "poetry run mypy check_project.py hooks",
+    "pylint": "poetry run pylint check_project.py hooks",
     "qa": "yarn mypy && yarn pylint && yarn check-spelling && yarn check-formatting",
     "test": "poetry run pytest"
   },
