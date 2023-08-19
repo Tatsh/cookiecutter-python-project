@@ -37,6 +37,13 @@ def main() -> int:
     sp.run(('yarn', 'format'), check=True)
     for args in GIT_COMMAND_ARGS:
         sp.run(('git',) + args, check=True)
+    with open('.vscode/dictionary.txt', 'r') as f:
+        words = [x.strip() for x in f.readlines()]
+    words.append('{{ cookiecutter.module_name }}\n')
+    words.append('{{cookiecutter.directory_name}}\n')
+    words.sort()
+    with open('.vscode/dictionary.txt', 'w') as f:
+        f.writelines(words)
     return 0
 
 
