@@ -33,6 +33,7 @@ def main() -> int:
                  ('-G', 'tests') + test_packages):
         sp.run(('poetry', 'add') + args, check=True)
     sp.run(('poetry', 'install', '--with=dev', '--with=docs', '--with=tests'), check=True)
+    sp.run(('yarn',), check=True)
     sp.run(('yarn', 'format'), check=True)
     for args in GIT_COMMAND_ARGS:
         sp.run(('git',) + args, check=True)
