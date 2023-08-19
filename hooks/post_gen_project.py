@@ -9,9 +9,6 @@ REPO_URI = 'git@github.com:{{ cookiecutter.github_username }}/{{ cookiecutter.di
 GIT_COMMAND_ARGS = (('init',), ('add', '.'), ('commit', '-m', 'Start of project', '--signoff'),
                     ('remote', 'add', 'origin', REPO_URI))
 
-YARN_COMMAND_ARGS = (('add', '-D', 'cspell', 'markdownlint-cli2', 'prettier-plugin-sort-json',
-                      'prettier-plugin-toml'), ('format',))
-
 
 def main() -> int:
     module_name = '{{ cookiecutter.module_name }}'
@@ -36,8 +33,7 @@ def main() -> int:
                  ('-G', 'tests') + test_packages):
         sp.run(('poetry', 'add') + args, check=True)
     sp.run(('poetry', 'install', '--with=dev', '--with=docs', '--with=tests'), check=True)
-    for args in YARN_COMMAND_ARGS:
-        sp.run(('yarn',) + args, check=True)
+    sp.run(('yarn', 'format'), check=True)
     for args in GIT_COMMAND_ARGS:
         sp.run(('git',) + args, check=True)
     return 0
