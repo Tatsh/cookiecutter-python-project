@@ -1,6 +1,7 @@
 {
   "[python]": {
-    "editor.defaultFormatter": "ms-python.python",
+    "editor.defaultFormatter": "eeyore.yapf",
+    "editor.formatOnSaveMode": "file",
     "editor.tabSize": 4
   },
   "cSpell.enabled": true,
@@ -53,7 +54,6 @@
   "python.analysis.stubPath": ".stubs",
   "python.analysis.typeCheckingMode": "strict",
   "python.defaultInterpreterPath": "/usr/bin/python",
-  "python.formatting.provider": "yapf",
   "python.languageServer": "Pylance",
   "python.linting.flake8Enabled": false,
   "python.linting.pylintEnabled": true,
