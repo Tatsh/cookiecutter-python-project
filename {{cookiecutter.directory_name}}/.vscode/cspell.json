@@ -72,9 +72,12 @@
     "dist/**",
     "htmlcov/**"
   ],
+  "language": "en-GB",
   "languageSettings": [
     {
-      "dictionaries": ["main"],
+      "dictionaries": [
+        "main"
+      ],
       "languageId": "*"
     }
   ]
