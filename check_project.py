@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 from pathlib import Path
 from typing import Any
 import json
@@ -27,6 +28,8 @@ E_KEY_NOT_PRESENT_OR_INVALID = 'E0011: {}: "{}" key is not present or is invalid
 E_PYPROJECT_PACKAGE_JSON_VERSION_MISMATCH = ('E0012: package.json version and pyproject.toml '
                                              'version differ.')
 E_KEY_NOT_PRESENT = 'E0013: {}: "{}" key is not present.'
+E_MIGRATE_TO_RUFF = 'E0014: Pylint settings detected. Migrate to Ruff.'
+E_UNEXPECTED_KEY = 'E0015: {}: "{}" key should not be present.'
 
 EXPECTED_FILES = ('.github/workflows/close-inactive.yml', '.github/workflows/qa.yml', '.gitignore',
                   '.markdownlint.json', '.prettierignore', '.readthedocs.yaml',
@@ -38,7 +41,6 @@ EXPECTED_FILES = ('.github/workflows/close-inactive.yml', '.github/workflows/qa.
 UNEXPECTED_FILES = {
     '.isort.cfg': 'pyproject.toml',
     '.prettierrc': 'package.json',
-    '.pylintrc': 'pyproject.toml',
     '.style.yapf': 'pyproject.toml',
     'mypy.ini': 'pyproject.toml'
 }
@@ -50,7 +52,7 @@ CSPELL_EXPECTED_IGNORE_PATHS = ('*.log', '.coverage', '.directory', '.git', '.my
                                 'dist/**', 'htmlcov/**')
 VSCODE_SETTINGS_JSON_EXPECTED_KEY_VALUES = {
     '[python]': {
-        'editor.defaultFormatter': 'ms-python.python',
+        'editor.defaultFormatter': 'eeyore.yapf',
         'editor.tabSize': 4
     },
     'cSpell.enabled': True,
@@ -80,13 +82,12 @@ VSCODE_SETTINGS_JSON_EXPECTED_KEY_VALUES = {
     }],
     'python.analysis.stubPath': '.stubs',
     'python.analysis.typeCheckingMode': 'strict',
-    'python.formatting.provider': 'yapf',
     'python.languageServer': 'Pylance',
-    'python.linting.flake8Enabled': False,
-    'python.linting.pylintEnabled': True,
     'yaml.format.printWidth': 100,
 }
-# pylint: disable=invalid-string-quote
+VSCODE_SETTINGS_JSON_UNEXPECTED_KEYS = {
+    'python.formatting.provider', 'python.linting.flake8Enabled', 'python.linting.pylintEnabled'
+}
 DOCS_CONF_PY_EXPECTED_LINES = (
     '^import toml', "with open(f'{dirname(__file__)}/../pyproject.toml') as f:",
     '^copyright: Final[str] = str(datetime.now().year)',
@@ -94,7 +95,6 @@ DOCS_CONF_PY_EXPECTED_LINES = (
     "^version: Final[str] = PROJECT['tool']['poetry']['version']",
     "^release: Final[str] = f'v{version}'",
     "['sphinx_click'] if PROJECT['tool']['poetry'].get('scripts') else [])")
-# pylint: enable=invalid-string-quote
 MARKDOWN_JSON_EXPECTED_KEY_VALUES = {
     'default': True,
     'line-length': {
@@ -104,7 +104,6 @@ MARKDOWN_JSON_EXPECTED_KEY_VALUES = {
 }
 PACKAGE_JSON_EXPECTED_KEYS = ('contributors', 'devDependencies', 'license', 'name', 'prettier',
                               'repository', 'scripts', 'version')
-# pylint: disable=invalid-string-quote
 PACKAGE_JSON_EXPECTED_SCRIPT_VALUES = {
     'check-formatting':
         "yarn prettier -c . && poetry run isort . --check && poetry run yapf -prd . && "
@@ -124,11 +123,10 @@ PACKAGE_JSON_EXPECTED_SCRIPT_VALUES = {
     "qa": 'yarn mypy && yarn pylint && yarn check-spelling && yarn check-formatting',
     "test": "poetry run pytest"
 }
-# pylint: enable=invalid-string-quote
 PYPROJECT_EXPECTED_POETRY_KEYS = ('authors', 'classifiers', 'description', 'documentation',
                                   'homepage', 'keywords', 'license', 'name', 'packages', 'readme',
                                   'version')
-PYPROJECT_EXPECTED_TOOL_KEYS = ('poetry', 'isort', 'mypy', 'pylint', 'pytest', 'rstcheck', 'yapf')
+PYPROJECT_EXPECTED_TOOL_KEYS = ('poetry', 'isort', 'mypy', 'pytest', 'rstcheck', 'ruff', 'yapf')
 
 
 def log_key_not_present_expected_value(filename: str, key: str, value: str) -> None:
@@ -219,6 +217,9 @@ def check_vscode_settings_json(workdir: Path) -> None:
             elif DeepDiff(data[key], value):
                 click.echo(
                     E_UNEXPECTED_VALUE.format('.vscode/settings.json', key, json.dumps(value)))
+        for key in VSCODE_SETTINGS_JSON_UNEXPECTED_KEYS:
+            if key in data:
+                click.echo(E_UNEXPECTED_KEY.format('.vscode/settings.json', key))
 
 
 def check_docs_conf_py(workdir: Path) -> None:
@@ -289,6 +290,18 @@ def check_pyproject_toml(workdir: Path) -> None:
             click.echo(E_KEY_NOT_PRESENT_OR_INVALID.format('pyproject.toml', 'tool'))
 
 
+def check_pylint(workdir: Path) -> None:
+    if (workdir / '.pylintrc').exists():
+        click.echo(E_MIGRATE_TO_RUFF)
+        return
+    if (data := read_toml_file(workdir, 'pyproject.toml')):
+        try:
+            if 'pylint' in data['tool']:
+                click.echo(E_MIGRATE_TO_RUFF)
+        except KeyError:
+            pass
+
+
 @click.command()
 @click.argument('workdir',
                 default='.',
@@ -301,6 +314,7 @@ def main(workdir: Path, no_pluggy: bool) -> None:
     check_markdownlint_json(workdir)
     check_package_json(workdir, no_pluggy=no_pluggy)
     check_pyproject_toml(workdir)
+    check_pylint(workdir)
 
 
 if __name__ == '__main__':
