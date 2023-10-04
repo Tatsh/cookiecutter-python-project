@@ -2,10 +2,23 @@
 name = "{{cookiecutter.directory_name}}"
 version = "0.0.1"
 authors = {{ cookiecutter.authors.list | jsonify }}
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Typing :: Typed"
+]
 description = "{{cookiecutter.description}}"
+documentation = "https://{{cookiecutter.directory_name}}.readthedocs.io/en/latest/"
+include = ["man"]
+keywords = ["command line"]
 license = "MIT"
 packages = [{ include = "{{cookiecutter.module_name}}" }]
 readme = "README.md"
+repository = "https://github.com/Tatsh/{{cookiecutter.directory_name}}"
 
 [tool.poetry.dependencies]
 python = ">=3.10,<4"
@@ -34,6 +47,11 @@ requires = ["poetry-core"]
 {{ cookiecutter.main_cli_name }} = "{{ cookiecutter.module_name }}:main"
 {% endif %}
 
+[tool.commitizen]
+tag_format = "v$version"
+version_files = ["README.md", "man/{{cookiecutter.directory_name}}.1", "package.json"]
+version_provider = "poetry"
+
 [tool.isort]
 case_sensitive = true
 combine_as_imports = true
@@ -48,6 +66,7 @@ disallow_untyped_calls = true
 disallow_untyped_defs = true
 disallow_untyped_decorators = true
 disallow_subclassing_any = true
+# mypy_path = "./.stubs"
 show_column_numbers = true
 show_error_codes = true
 strict_equality = true
@@ -59,19 +78,10 @@ warn_unused_ignores = true
 
 [tool.ruff]
 exclude = [
-  ".bzr",
-  ".eggs",
   ".git",
-  ".git-rewrite",
-  ".hg",
   ".mypy_cache",
-  ".nox",
-  ".pants.d",
   ".ruff_cache",
-  ".svn",
-  ".tox",
   "_build",
-  "buck-out",
   "build",
   "dist",
   "node_modules"
@@ -80,9 +90,6 @@ line-length = 100
 
 [tool.pytest.ini_options]
 mock_use_standalone_module = true
-
-[tool.rstcheck]
-ignore_directives = ["automodule"]
 
 [tool.yapf]
 align_closing_bracket_with_visual_indent = true

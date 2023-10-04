@@ -5,8 +5,8 @@
 Commands
 --------
 
-.. click:: instagram_archiver.main:main
-  :prog: ia
+.. click:: {{ cookiecutter.module_name }}.main:main
+  :prog: {{ cookiecutter.main_cli_name }}
   :nested: full
 {% endif %}
 

@@ -5,6 +5,7 @@ jobs:
       GITHUB_TOKEN: {% raw %}${{ secrets.GITHUB_TOKEN }}{% endraw %}
     runs-on: ubuntu-latest
     steps:
+      - if: false
       - uses: actions/checkout@v3
       - name: Install Poetry
         run: pipx install poetry
@@ -18,7 +19,7 @@ jobs:
       - name: Install dependencies (Yarn)
         run: yarn
       - name: Run tests
-        run: yarn test
+        run: yarn test --cov={{cookiecutter.module_name}} --cov-branch
       - if: matrix.python-version == 3.11
         name: Coveralls
         run: poetry run coveralls --service=github
