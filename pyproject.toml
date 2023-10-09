@@ -31,7 +31,7 @@ optional = true
 
 [tool.poetry.group.docs.dependencies]
 docutils = "^0.20.1"
-esbonio = "^0.16.1"
+esbonio = "^0.16.2"
 sphinx = "^7.2.6"
 
 [build-system]
