@@ -26,8 +26,8 @@
     "clean-dict": "r=(); while IFS=$\\n read -r w; do ! rg --no-config -qi. -g '!.vscode/dictionary.txt' -m 1 \"$w\" . && r+=(\"$w\"); done < ./.vscode/dictionary.txt; j=$(printf \"|%s\" \"${r[@]}\"); j=\"^(${j:1})$\"; grep -Ev \"${j}\" ./.vscode/dictionary.txt > new && mv new ./.vscode/dictionary.txt",
     "format": "yarn prettier -w './*.json' ./README.md ./pyproject.toml && poetry run isort check_project.py hooks && poetry run yapf -ri check_project.py hooks",
     "mypy": "poetry run mypy check_project.py hooks",
-    "pylint": "poetry run pylint check_project.py hooks",
-    "qa": "yarn mypy && yarn pylint && yarn check-spelling && yarn check-formatting",
+    "qa": "yarn mypy && yarn ruff && yarn check-spelling && yarn check-formatting",
+    "ruff": "poetry run ruff check_project.py hooks",
     "test": "poetry run pytest"
   },
   "version": "0.0.1"

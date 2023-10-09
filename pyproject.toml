@@ -25,6 +25,7 @@ types-requests = "^2.31.0.8"
 typing-extensions = "^4.8.0"
 yapf = ">=0.33,<0.41"
 types-toml = "^0.10.8.7"
+ruff = "^0.0.292"
 
 [tool.poetry.group.docs]
 optional = true
