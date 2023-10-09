@@ -15,7 +15,7 @@ def main() -> int:
         print(f'ERROR: {module_name} is not a valid Python module name!', file=sys.stderr)
         return 1
     packages: tuple[str, ...] = ()
-    dev_packages: tuple[str, ...] = ('mypy', 'rope', 'ruff', 'yapf')
+    dev_packages: tuple[str, ...] = ('isort', 'mypy', 'rope', 'ruff', 'yapf')
     docs_packages: tuple[str, ...] = ('doc8', 'docutils', 'esbonio', 'restructuredtext-lint',
                                       'sphinx', 'tomlkit')
     test_packages: tuple[str, ...] = ('coveralls', 'mock', 'pytest', 'pytest-mock')
