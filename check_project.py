@@ -44,7 +44,6 @@ UNEXPECTED_FILES = {
     '.style.yapf': 'pyproject.toml',
     'mypy.ini': 'pyproject.toml'
 }
-# SHOULD_HAVE_SAME_CONTENT = ('.github/workflows/close-inactive.yml', '.github/workflows/qa.yml')
 CSPELL_EXPECTED_KEYS = ('dictionaryDefinitions', 'enableGlobDot', 'enabledLanguageIds',
                         'ignorePaths', 'languageSettings')
 CSPELL_EXPECTED_IGNORE_PATHS = ('*.log', '.coverage', '.directory', '.git', '.mypy_cache',
@@ -276,13 +275,13 @@ def check_package_json(workdir: Path, no_pluggy: bool = False) -> None:
                         E_LIST_MISSING_VALUE.format('package.json', 'prettier.plugins', plugin))
         except KeyError:
             click.echo(E_KEY_NOT_PRESENT.format('prettier.plugins'), err=True)
-        if (data := read_toml_file(workdir, 'pyproject.toml')):
-            if 'tool' in data and 'poetry' in data['tool']:
-                poetry = data['tool']['poetry']
-                if ('version' in poetry and poetry['version'] is not None
-                        and package_json_version is not None
-                        and package_json_version != poetry['version']):
-                    click.echo(E_PYPROJECT_PACKAGE_JSON_VERSION_MISMATCH)
+        if ((data := read_toml_file(workdir, 'pyproject.toml')) and 'tool' in data
+                and 'poetry' in data['tool']):
+            poetry = data['tool']['poetry']
+            if ('version' in poetry and poetry['version'] is not None
+                    and package_json_version is not None
+                    and package_json_version != poetry['version']):
+                click.echo(E_PYPROJECT_PACKAGE_JSON_VERSION_MISMATCH)
 
 
 def check_pyproject_toml(workdir: Path) -> None:

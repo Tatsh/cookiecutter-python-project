@@ -35,6 +35,7 @@
     "mypy": "poetry run mypy check_project.py hooks",
     "qa": "yarn mypy && yarn ruff && yarn check-spelling && yarn check-formatting",
     "ruff": "poetry run ruff check_project.py hooks",
+    "ruff:fix": "poetry run ruff --fix check_project.py hooks",
     "test": "poetry run pytest"
   },
   "version": "0.0.1"

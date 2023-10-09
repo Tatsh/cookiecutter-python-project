@@ -14,18 +14,18 @@ def main() -> int:
     if not re.match(MODULE_REGEX, module_name):
         print(f'ERROR: {module_name} is not a valid Python module name!', file=sys.stderr)
         return 1
-    packages: tuple[str, ...] = tuple()
+    packages: tuple[str, ...] = ()
     dev_packages: tuple[str, ...] = ('mypy', 'rope', 'ruff', 'yapf')
     docs_packages: tuple[str, ...] = ('doc8', 'docutils', 'esbonio', 'restructuredtext-lint',
                                       'sphinx', 'tomlkit')
     test_packages: tuple[str, ...] = ('coveralls', 'mock', 'pytest', 'pytest-mock')
-    if {{cookiecutter.want_main}}:  # type: ignore[name-defined] # noqa F821
+    if {{cookiecutter.want_main}}:  # type: ignore[name-defined] # noqa: F821
         packages += ('click>=8.1.3,!=8.1.4', 'loguru')
         docs_packages += ('sphinx-click',)
     else:
         main_py = Path(module_name) / 'main.py'
         main_py.unlink()
-    if {{cookiecutter.want_requests}}:  # type: ignore[name-defined] # noqa F821
+    if {{cookiecutter.want_requests}}:  # type: ignore[name-defined] # noqa: F821
         dev_packages += ('types-requests',)
         packages += ('requests',)
         test_packages += ('requests-mock',)
