@@ -114,14 +114,18 @@ PACKAGE_JSON_EXPECTED_SCRIPT_VALUES = {
         "'!.vscode/dictionary.txt' -m 1 \"$w\" . && r+=(\"$w\"); done < ./.vscode/dictionary.txt; "
         "j=$(printf \"|%s\" \"${r[@]}\"); j=\"^(${j:1})$\"; grep -Ev \"${j}\" "
         "./.vscode/dictionary.txt > new && mv new ./.vscode/dictionary.txt",
-    "fix-pluggy": "touch \"$(poetry run python -c 'import inspect, os, pluggy; "
+    'fix-pluggy': "touch \"$(poetry run python -c 'import inspect, os, pluggy; "
                   "print(os.path.dirname(inspect.getabsfile(pluggy)))')/py.typed\"",
     'format': "yarn prettier -w . && poetry run isort . && poetry run yapf -pri . && "
               "markdownlint-cli2 --fix '**/*.md' '#node_modules'",
     'mypy': 'yarn fix-pluggy && poetry run mypy .',
-    "qa": 'yarn mypy && yarn ruff && yarn check-spelling && yarn check-formatting',
-    "ruff": 'poetry run ruff .',
-    "test": "poetry run pytest"
+    'qa': 'yarn mypy && yarn ruff && yarn check-spelling && yarn check-formatting',
+    'ruff': 'poetry run ruff .',
+    'test': 'poetry run pytest'
+}
+PACKAGE_JSON_EXPECTED_PRETTIER_PLUGIN_VALUES = {
+    '@prettier/plugin-xml', 'prettier-plugin-ini', 'prettier-plugin-sort-json',
+    'prettier-plugin-toml'
 }
 PYPROJECT_EXPECTED_POETRY_KEYS = ('authors', 'classifiers', 'description', 'documentation',
                                   'homepage', 'keywords', 'license', 'name', 'packages', 'readme',
@@ -265,6 +269,13 @@ def check_package_json(workdir: Path, no_pluggy: bool = False) -> None:
                     click.echo(
                         E_UNEXPECTED_VALUE.format('package.json', f'scripts.{key}',
                                                   json.dumps(new_value)))
+        try:
+            for plugin in PACKAGE_JSON_EXPECTED_PRETTIER_PLUGIN_VALUES:
+                if plugin not in data['prettier']['plugins']:
+                    click.echo(
+                        E_LIST_MISSING_VALUE.format('package.json', 'prettier.plugins', plugin))
+        except KeyError:
+            click.echo(E_KEY_NOT_PRESENT.format('prettier.plugins'), err=True)
         if (data := read_toml_file(workdir, 'pyproject.toml')):
             if 'tool' in data and 'poetry' in data['tool']:
                 poetry = data['tool']['poetry']
