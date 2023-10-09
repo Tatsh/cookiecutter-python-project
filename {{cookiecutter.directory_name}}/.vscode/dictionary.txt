@@ -28,6 +28,7 @@ docparams
 docstrings
 docutils
 ecda
+eeyore
 elif
 endregion
 epub
@@ -49,11 +50,13 @@ infojson
 inlinevar
 isort
 itertools
+jinja
 khtml
 kwallet
 labelsize
 levelname
 levelno
+linters
 loguru
 lunchy
 maxdepth
@@ -78,7 +81,6 @@ overgeneral
 paren
 parens
 parseable
-pipx
 pipx
 plabel
 pluggy

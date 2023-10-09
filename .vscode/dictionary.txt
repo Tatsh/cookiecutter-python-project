@@ -15,6 +15,7 @@ cmdclass
 colenabled
 colorder
 colwidth
+commitizen
 concat
 contextlib
 contextmanager
@@ -27,9 +28,11 @@ dets
 distutils
 docparams
 docstrings
+doctrees
 docutils
 doxdocgen
 ecda
+eeyore
 elif
 endraw
 endregion
@@ -54,6 +57,7 @@ infojson
 inlinevar
 isort
 itertools
+jinja
 jinjahtml
 jsonify
 khtml
@@ -137,6 +141,7 @@ timedelta
 timeformat
 tkinter
 toctree
+tomlkit
 tryfirst
 typecheck
 udvare

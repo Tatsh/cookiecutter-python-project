@@ -16,15 +16,16 @@ def main() -> int:
         return 1
     packages: tuple[str, ...] = tuple()
     dev_packages: tuple[str, ...] = ('mypy', 'rope', 'ruff', 'yapf')
-    docs_packages: tuple[str, ...] = ('doc8', 'docutils', 'esbonio', 'restructuredtext-lint', 'sphinx', 'tomlkit')
+    docs_packages: tuple[str, ...] = ('doc8', 'docutils', 'esbonio', 'restructuredtext-lint',
+                                      'sphinx', 'tomlkit')
     test_packages: tuple[str, ...] = ('coveralls', 'mock', 'pytest', 'pytest-mock')
-    if {{cookiecutter.want_main}}:  # type: ignore[name-defined]
+    if {{cookiecutter.want_main}}:  # type: ignore[name-defined] # noqa F821
         packages += ('click>=8.1.3,!=8.1.4', 'loguru')
         docs_packages += ('sphinx-click',)
     else:
         main_py = Path(module_name) / 'main.py'
         main_py.unlink()
-    if {{cookiecutter.want_requests}}:  # type: ignore[name-defined]
+    if {{cookiecutter.want_requests}}:  # type: ignore[name-defined] # noqa F821
         dev_packages += ('types-requests',)
         packages += ('requests',)
         test_packages += ('requests-mock',)
@@ -35,7 +36,7 @@ def main() -> int:
     sp.run(('yarn',), check=True)
     sp.run(('yarn', 'format'), check=True)
     with open('.vscode/dictionary.txt', 'r') as f:
-        words =  f.readlines()
+        words = f.readlines()
     words.append('{{ cookiecutter.module_name }}\n')
     words.append('{{cookiecutter.directory_name}}\n')
     words.sort()
