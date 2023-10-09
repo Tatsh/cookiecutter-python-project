@@ -119,8 +119,8 @@ PACKAGE_JSON_EXPECTED_SCRIPT_VALUES = {
     'format': "yarn prettier -w . && poetry run isort . && poetry run yapf -pri . && "
               "markdownlint-cli2 --fix '**/*.md' '#node_modules'",
     'mypy': 'yarn fix-pluggy && poetry run mypy .',
-    "pylint": 'poetry run pylint .',
-    "qa": 'yarn mypy && yarn pylint && yarn check-spelling && yarn check-formatting',
+    "qa": 'yarn mypy && yarn ruff && yarn check-spelling && yarn check-formatting',
+    "ruff": 'poetry run ruff .',
     "test": "poetry run pytest"
 }
 PYPROJECT_EXPECTED_POETRY_KEYS = ('authors', 'classifiers', 'description', 'documentation',
