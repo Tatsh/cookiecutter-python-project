@@ -7,12 +7,12 @@ classifiers = [
   "Intended Audience :: Developers",
   "License :: OSI Approved :: MIT License",
   "Programming Language :: Python",
-  "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
   "Typing :: Typed"
 ]
 description = "{{cookiecutter.description}}"
-documentation = "https://{{cookiecutter.directory_name}}.readthedocs.io/en/latest/"
+documentation = "https://{{cookiecutter.directory_name}}.readthedocs.io/"
 include = ["man"]
 keywords = ["command line"]
 license = "MIT"
@@ -21,7 +21,7 @@ readme = "README.md"
 repository = "https://github.com/Tatsh/{{cookiecutter.directory_name}}"
 
 [tool.poetry.dependencies]
-python = ">=3.10,<4"
+python = ">=3.11,<4"
 
 [tool.poetry.group.dev]
 optional = true
@@ -37,28 +37,42 @@ optional = true
 optional = true
 
 [tool.poetry.group.tests.dependencies]
-
-[build-system]
-build-backend = "poetry.core.masonry.api"
-requires = ["poetry-core"]
 {% if cookiecutter.want_main %}
 
 [tool.poetry.scripts]
 {{ cookiecutter.main_cli_name }} = "{{ cookiecutter.module_name }}:main"
 {% endif %}
 
+[build-system]
+build-backend = "poetry.core.masonry.api"
+requires = ["poetry-core"]
+
 [tool.commitizen]
 tag_format = "v$version"
-version_files = ["README.md", "man/{{cookiecutter.directory_name}}.1", "package.json"]
+version_files = ["README.md", "man/{{cookiecutter.module_name}}.1", "package.json"]
 version_provider = "poetry"
 
-[tool.isort]
-case_sensitive = true
-combine_as_imports = true
-from_first = true
-line_length = 100
-order_by_type = true
-use_parentheses = true
+[tool.cruft]
+skip = [
+  "./*.lock",
+  "./.*_cache",
+  ".git/COMMIT_EDITMSG",
+  ".git/HEAD",
+  ".git/config",
+  "./.git/hooks/*.sample",
+  ".git/index",
+  ".git/logs/HEAD",
+  ".vscode/dictionary.txt",
+  "CHANGELOG.md",
+  "LICENSE.txt",
+  "dist/",
+  "./docs/*.rst",
+  "htmlcov/",
+  "man/",
+  "node_modules/",
+  "./tests/*/test_*.py",
+  "./tests/test_*.py"
+]
 
 [tool.mypy]
 disallow_incomplete_defs = true
@@ -76,9 +90,12 @@ warn_return_any = true
 warn_unreachable = true
 warn_unused_ignores = true
 
+[tool.pytest.ini_options]
+mock_use_standalone_module = true
+
 [tool.ruff]
 cache-dir = "~/.cache/ruff"
-extend-ignore = ["PTH123", "T201", "TD002", "TD003", "TD004"]
+extend-ignore = ["C408", "PTH123", "T201", "TD002", "TD003", "TD004"]
 namespace-packages = ["hooks"]
 extend-select = [
   "A",
@@ -158,6 +175,7 @@ extend-select = [
   "Q",
   "RET",
   "RSE",
+  "RUF200",
   "S506",
   "S602",
   "SIM",
@@ -167,18 +185,16 @@ extend-select = [
   "TCH",
   "TD",
   "TRY",
-  "YTT",
-  "RUF200"
+  "UP",
+  "YTT"
 ]
 line-length = 100
 target-version = "py311"
+unsafe-fixes = true
 
 [tool.ruff.flake8-quotes]
 inline-quotes = "single"
 multiline-quotes = "single"
-
-[tool.pytest.ini_options]
-mock_use_standalone_module = true
 
 [tool.yapf]
 align_closing_bracket_with_visual_indent = true

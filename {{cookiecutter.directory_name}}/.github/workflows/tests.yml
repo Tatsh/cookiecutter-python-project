@@ -15,19 +15,19 @@ jobs:
           cache: poetry
           python-version: {% raw %}${{ matrix.python-version }}{% endraw %}
       - name: Install dependencies (Poetry)
-        run: poetry install --with=dev --with=tests
+        run: poetry install --with=dev,docs,tests --all-extras
       - name: Install dependencies (Yarn)
         run: yarn
       - name: Run tests
         run: yarn test --cov={{cookiecutter.module_name}} --cov-branch
-      - if: matrix.python-version == 3.11
+      - if: matrix.python-version == 3.12
         name: Coveralls
         run: poetry run coveralls --service=github
     strategy:
       matrix:
         python-version:
-          - '3.10'
           - '3.11'
+          - '3.12'
 name: Tests
 'on':
   pull_request:

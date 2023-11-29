@@ -2,6 +2,7 @@ from pathlib import Path
 import re
 import subprocess as sp
 import sys
+from typing import cast
 
 MODULE_REGEX = r'^[_a-zA-Z][_a-zA-Z0-9]+$'
 REPO_URI = 'git@github.com:{{ cookiecutter.github_username }}/{{ cookiecutter.directory_name }}.git'
@@ -14,11 +15,10 @@ def main() -> int:
     if not re.match(MODULE_REGEX, module_name):
         print(f'ERROR: {module_name} is not a valid Python module name!', file=sys.stderr)
         return 1
-    packages: tuple[str, ...] = ()
-    dev_packages: tuple[str, ...] = ('isort', 'mypy', 'rope', 'ruff', 'yapf')
-    docs_packages: tuple[str, ...] = ('doc8', 'docutils', 'esbonio', 'restructuredtext-lint',
-                                      'sphinx', 'tomlkit')
-    test_packages: tuple[str, ...] = ('coveralls', 'mock', 'pytest', 'pytest-mock')
+    packages = cast(tuple[str, ...], tuple())
+    dev_packages = ('mypy', 'rope', 'ruff', 'yapf')
+    docs_packages = ('doc8', 'docutils', 'esbonio', 'restructuredtext-lint', 'sphinx', 'tomlkit')
+    test_packages = ('coveralls', 'mock', 'pytest', 'pytest-cov', 'pytest-mock')
     if {{cookiecutter.want_main}}:  # type: ignore[name-defined] # noqa: F821
         packages += ('click>=8.1.3,!=8.1.4', 'loguru')
         docs_packages += ('sphinx-click',)
@@ -29,13 +29,16 @@ def main() -> int:
         dev_packages += ('types-requests',)
         packages += ('requests',)
         test_packages += ('requests-mock',)
-    for args in (packages, ('-G', 'dev') + dev_packages, ('-G', 'docs') + docs_packages,
-                 ('-G', 'tests') + test_packages):
+    for args in (packages, ('-G', 'dev') + tuple(sorted(dev_packages)),
+                 ('-G', 'docs') + tuple(sorted(docs_packages)),
+                 ('-G', 'tests') + tuple(sorted(test_packages))):
+        if not args:
+            continue
         sp.run(('poetry', 'add') + args, check=True)
-    sp.run(('poetry', 'install', '--with=dev', '--with=docs', '--with=tests'), check=True)
+    sp.run(('poetry', 'install', '--with=dev,docs,tests', '--all-extras'), check=True)
     sp.run(('yarn',), check=True)
     sp.run(('yarn', 'format'), check=True)
-    with open('.vscode/dictionary.txt', 'r') as f:
+    with open('.vscode/dictionary.txt') as f:
         words = f.readlines()
     words.append('{{ cookiecutter.module_name }}\n')
     words.append('{{cookiecutter.directory_name}}\n')

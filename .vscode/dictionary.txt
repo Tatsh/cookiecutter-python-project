@@ -26,6 +26,7 @@ deepdiff
 delslice
 dets
 distutils
+djlint
 docparams
 docstrings
 doctrees
@@ -55,7 +56,6 @@ idiv
 ignoreerrors
 infojson
 inlinevar
-isort
 itertools
 jinja
 jinjahtml

@@ -9,6 +9,7 @@
       "env": {
         "_PYTEST_RAISE": "1"
       },
+      "justMyCode": true,
       "module": "pytest",
       "name": "Run tests",
       "request": "launch",

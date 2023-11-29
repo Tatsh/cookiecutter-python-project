@@ -48,7 +48,6 @@ idiv
 ignoreerrors
 infojson
 inlinevar
-isort
 itertools
 jinja
 khtml
@@ -127,6 +126,7 @@ timedelta
 timeformat
 tkinter
 toctree
+tomlkit
 tryfirst
 typecheck
 udvare

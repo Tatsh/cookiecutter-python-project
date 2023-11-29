@@ -39,7 +39,6 @@ EXPECTED_FILES = ('.github/workflows/close-inactive.yml', '.github/workflows/qa.
                   'docs/index.rst', 'package.json', 'poetry.lock', 'pyproject.toml',
                   'tests/conftest.py', 'yarn.lock')
 UNEXPECTED_FILES = {
-    '.isort.cfg': 'pyproject.toml',
     '.prettierrc': 'package.json',
     '.style.yapf': 'pyproject.toml',
     'mypy.ini': 'pyproject.toml'
@@ -105,7 +104,7 @@ PACKAGE_JSON_EXPECTED_KEYS = ('contributors', 'devDependencies', 'license', 'nam
                               'repository', 'scripts', 'version')
 PACKAGE_JSON_EXPECTED_SCRIPT_VALUES = {
     'check-formatting':
-        "yarn prettier -c . && poetry run isort . --check && poetry run yapf -prd . && "
+        "yarn prettier -c . && poetry run yapf -prd . && "
         "markdownlint-cli2 '**/*.md' '#node_modules'",
     'check-spelling': 'cspell --no-progress .',
     'clean-dict':
@@ -115,7 +114,7 @@ PACKAGE_JSON_EXPECTED_SCRIPT_VALUES = {
         "./.vscode/dictionary.txt > new && mv new ./.vscode/dictionary.txt",
     'fix-pluggy': "touch \"$(poetry run python -c 'import inspect, os, pluggy; "
                   "print(os.path.dirname(inspect.getabsfile(pluggy)))')/py.typed\"",
-    'format': "yarn prettier -w . && poetry run isort . && poetry run yapf -pri . && "
+    'format': "yarn prettier -w . && poetry run yapf -pri . && "
               "markdownlint-cli2 --fix '**/*.md' '#node_modules'",
     'mypy': 'yarn fix-pluggy && poetry run mypy .',
     'qa': 'yarn mypy && yarn ruff && yarn check-spelling && yarn check-formatting',
@@ -129,7 +128,7 @@ PACKAGE_JSON_EXPECTED_PRETTIER_PLUGIN_VALUES = {
 PYPROJECT_EXPECTED_POETRY_KEYS = ('authors', 'classifiers', 'description', 'documentation',
                                   'homepage', 'keywords', 'license', 'name', 'packages', 'readme',
                                   'version')
-PYPROJECT_EXPECTED_TOOL_KEYS = ('poetry', 'isort', 'mypy', 'pytest', 'rstcheck', 'ruff', 'yapf')
+PYPROJECT_EXPECTED_TOOL_KEYS = ('poetry', 'mypy', 'pytest', 'ruff', 'yapf')
 
 
 def log_key_not_present_expected_value(filename: str, key: str, value: str) -> None:

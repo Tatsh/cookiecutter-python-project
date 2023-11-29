@@ -14,7 +14,6 @@
   "editor.rulers": [100],
   "editor.tabSize": 2,
   "editor.wordWrapColumn": 100,
-  "esbonio.sphinx.confDir": "docs",
   "eslint.lintTask.enable": true,
   "files.insertFinalNewline": true,
   "files.trimFinalNewlines": true,
@@ -39,16 +38,8 @@
   ],
   "python.analysis.stubPath": ".stubs",
   "python.analysis.typeCheckingMode": "strict",
-  "python.formatting.provider": "yapf",
   "python.languageServer": "Pylance",
   "restructuredtext.linter.disabledLinters": ["rstcheck"],
   "restructuredtext.linter.run": "onSave",
-  "ruff.args": [
-    "--extend-exclude=/**/site-packages/**/*.py",
-    "--extend-exclude=/opt/**/*.py",
-    "--extend-exclude=/usr/**/*.py",
-    "--force-exclude",
-    "--respect-gitignore"
-  ],
   "yaml.format.printWidth": 100
 }
