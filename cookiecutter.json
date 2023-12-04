@@ -1,20 +1,52 @@
 {
+  "directory_name": "cool-project",
+  "module_name": "{{ cookiecutter.directory_name|replace('-', '_') }}",
+  "want_main": true,
+  "want_requests": true,
+  "main_cli_name": "{{ cookiecutter.directory_name }}",
   "authors": {
     "list": ["Andrew Udvare <audvare@gmail.com>"]
   },
   "description": "Short description of project for PyPI etc.",
-  "directory_name": "cool-project",
   "docs_theme": "alabaster",
   "gh_pages_theme": "jekyll-theme-midnight",
   "github_username": "Tatsh",
   "human_project_name": "Human-Readable Project Name",
-  "main_cli_name": "{{ cookiecutter.directory_name }}",
-  "module_name": "{{ cookiecutter.directory_name|replace('-', '_') }}",
   "readme": {
     "description": "{{ cookiecutter.description }}"
   },
   "repository_name": "{{cookiecutter.directory_name}}",
-  "want_main": true,
-  "want_requests": true,
-  "year": "{% now 'utc', '%Y' %}"
+  "year": "{% now 'utc', '%Y' %}",
+  "cruft_skip": {
+    "list": [
+      "./*.lock",
+      "./.*_cache",
+      "./.git/hooks/*.sample",
+      "./docs/*.rst",
+      "./tests/*/test_*.py",
+      "./tests/test_*.py",
+      ".git/COMMIT_EDITMSG",
+      ".git/HEAD",
+      ".git/config",
+      ".git/index",
+      ".git/logs/",
+      ".git/refs/",
+      ".vscode/dictionary.txt",
+      "CHANGELOG.md",
+      "LICENSE.txt",
+      "dist/",
+      "htmlcov/",
+      "man/",
+      "node_modules/",
+      "{{ cookiecutter.module_name }}/"
+    ]
+  },
+  "commitizen_version_files": {
+    "list": [
+      "README.md",
+      "man/{{cookiecutter.module_name}}.1",
+      "package.json",
+      "{{cookiecutter.module_name}}/__init__.py"
+    ]
+  }
 }

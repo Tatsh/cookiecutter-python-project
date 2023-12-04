@@ -3,9 +3,9 @@ jobs:
   test:
     env:
       GITHUB_TOKEN: {% raw %}${{ secrets.GITHUB_TOKEN }}{% endraw %}
+    if: false
     runs-on: ubuntu-latest
     steps:
-      - if: false
       - uses: actions/checkout@v3
       - name: Install Poetry
         run: pipx install poetry

@@ -17,6 +17,16 @@
     "endOfLine": "lf",
     "iniSpaceAroundEquals": true,
     "jsonRecursiveSort": true,
+    "overrides": [
+      {
+        "files": [
+          "cookiecutter.json"
+        ],
+        "options": {
+          "plugins": []
+        }
+      }
+    ],
     "plugins": [
       "@prettier/plugin-xml",
       "prettier-plugin-ini",

@@ -24,8 +24,8 @@
     "**/*cookiecutter.directory_name*/**/*.rst": "jinja",
     "**/*cookiecutter.directory_name*/**/*.toml": "jinja-toml",
     "**/*cookiecutter.directory_name*/**/*.txt": "jinja",
-    "**/*cookiecutter.directory_name*/**/*.yapf": "jinja",
     "**/*cookiecutter.directory_name*/**/*.y*ml": "jinja-yaml",
+    "**/*cookiecutter.directory_name*/**/*.yapf": "jinja",
     "**/*cookiecutter.directory_name*/**/.*ignore": "jinja",
     "**/*cookiecutter.directory_name*/**/.prettierrc": "jinja-json",
     "**/hooks/*.py": "jinja-py"
@@ -55,5 +55,6 @@
   "python.analysis.typeCheckingMode": "strict",
   "python.defaultInterpreterPath": "/usr/bin/python",
   "python.languageServer": "Pylance",
+  "sortJSON.excludedFiles": ["cookiecutter.json"],
   "yaml.format.printWidth": 100
 }

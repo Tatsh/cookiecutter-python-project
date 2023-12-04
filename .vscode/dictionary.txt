@@ -30,9 +30,12 @@ djlint
 docparams
 docstrings
 doctrees
+doctrees
+doctrees
 docutils
 doxdocgen
 ecda
+editmsg
 eeyore
 elif
 endraw
@@ -141,6 +144,7 @@ timedelta
 timeformat
 tkinter
 toctree
+tojson
 tomlkit
 tryfirst
 typecheck

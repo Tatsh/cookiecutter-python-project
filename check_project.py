@@ -103,9 +103,8 @@ MARKDOWN_JSON_EXPECTED_KEY_VALUES = {
 PACKAGE_JSON_EXPECTED_KEYS = ('contributors', 'devDependencies', 'license', 'name', 'prettier',
                               'repository', 'scripts', 'version')
 PACKAGE_JSON_EXPECTED_SCRIPT_VALUES = {
-    'check-formatting':
-        "yarn prettier -c . && poetry run yapf -prd . && "
-        "markdownlint-cli2 '**/*.md' '#node_modules'",
+    'check-formatting': "yarn prettier -c . && poetry run yapf -prd . && "
+                        "markdownlint-cli2 '**/*.md' '#node_modules'",
     'check-spelling': 'cspell --no-progress .',
     'clean-dict':
         "r=(); while IFS=$\\n read -r w; do ! rg --no-config -qi. -g "

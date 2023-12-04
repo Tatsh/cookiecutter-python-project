@@ -16,9 +16,10 @@ def main() -> int:
         print(f'ERROR: {module_name} is not a valid Python module name!', file=sys.stderr)
         return 1
     packages = cast(tuple[str, ...], tuple())
-    dev_packages = ('mypy', 'rope', 'ruff', 'yapf')
-    docs_packages = ('doc8', 'docutils', 'esbonio', 'restructuredtext-lint', 'sphinx', 'tomlkit')
-    test_packages = ('coveralls', 'mock', 'pytest', 'pytest-cov', 'pytest-mock')
+    dev_packages: tuple[str, ...] = ('commitizen', 'mypy', 'rope', 'ruff', 'yapf')
+    docs_packages: tuple[str, ...] = ('doc8', 'docutils', 'esbonio', 'restructuredtext-lint',
+                                      'sphinx', 'tomlkit')
+    test_packages: tuple[str, ...] = ('coveralls', 'mock', 'pytest', 'pytest-cov', 'pytest-mock')
     if {{cookiecutter.want_main}}:  # type: ignore[name-defined] # noqa: F821
         packages += ('click>=8.1.3,!=8.1.4', 'loguru')
         docs_packages += ('sphinx-click',)

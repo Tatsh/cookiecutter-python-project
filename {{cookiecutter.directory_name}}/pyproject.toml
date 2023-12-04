@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "{{cookiecutter.directory_name}}"
 version = "0.0.1"
-authors = {{ cookiecutter.authors.list | jsonify }}
+authors = {{ cookiecutter.authors.list | sort(case_sensitive=True) | jsonify }}
 classifiers = [
   "Development Status :: 4 - Beta",
   "Intended Audience :: Developers",
@@ -49,30 +49,11 @@ requires = ["poetry-core"]
 
 [tool.commitizen]
 tag_format = "v$version"
-version_files = ["README.md", "man/{{cookiecutter.module_name}}.1", "package.json"]
+version_files = {{ cookiecutter.commitizen_version_files.list | sort(case_sensitive=True) | jsonify }}
 version_provider = "poetry"
 
 [tool.cruft]
-skip = [
-  "./*.lock",
-  "./.*_cache",
-  ".git/COMMIT_EDITMSG",
-  ".git/HEAD",
-  ".git/config",
-  "./.git/hooks/*.sample",
-  ".git/index",
-  ".git/logs/HEAD",
-  ".vscode/dictionary.txt",
-  "CHANGELOG.md",
-  "LICENSE.txt",
-  "dist/",
-  "./docs/*.rst",
-  "htmlcov/",
-  "man/",
-  "node_modules/",
-  "./tests/*/test_*.py",
-  "./tests/test_*.py"
-]
+skip = {{ cookiecutter.cruft_skip.list | sort(case_sensitive=True) | jsonify }}
 
 [tool.mypy]
 disallow_incomplete_defs = true

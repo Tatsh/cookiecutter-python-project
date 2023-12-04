@@ -26,6 +26,7 @@ dets
 distutils
 docparams
 docstrings
+doctrees
 docutils
 ecda
 eeyore
