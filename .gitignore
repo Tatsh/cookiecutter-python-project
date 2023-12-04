@@ -1,6 +1,7 @@
-/.coverage
-/.directory
-/.pytest_cache/
+.coverage
+.directory
+.pytest_cache/
+.ruff_cache/
 /MANIFEST
 /build/
 /dist/

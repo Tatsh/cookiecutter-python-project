@@ -59,6 +59,7 @@ idiv
 ignoreerrors
 infojson
 inlinevar
+isort
 itertools
 jinja
 jinjahtml
