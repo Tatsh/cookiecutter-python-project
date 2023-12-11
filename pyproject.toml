@@ -1,11 +1,24 @@
 [tool.poetry]
-authors = ["Andrew Udvare <audvare@gmail.com>"]
-description = "My template."
-license = "MIT"
 name = "cookiecutter-python-project"
-packages = [{ include = "check_project.py" }]
-readme = "README.md"
 version = "0.0.1"
+authors = ["Andrew Udvare <audvare@gmail.com>"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Typing :: Typed",
+]
+description = "My Python project template"
+documentation = "https://cookiecutter-python-project.readthedocs.io/"
+include = ["man"]
+keywords = ["command line"]
+license = "MIT"
+packages = [{ include = "ignore_me" }]
+readme = "README.md"
+repository = "https://github.com/Tatsh/cookiecutter-python-project"
 
 [tool.poetry.dependencies]
 python = ">=3.11,<4"
@@ -14,29 +27,43 @@ python = ">=3.11,<4"
 optional = true
 
 [tool.poetry.group.dev.dependencies]
-click = "^8.1.7"
-deepdiff = "^6.7.1"
+commitizen = "^3.13.0"
 djlint = "^1.34.0"
 mypy = "^1.7.1"
 rope = "^1.11.0"
 ruff = "^0.1.7"
-toml = "^0.10.2"
-types-requests = "^2.31.0.10"
-types-toml = "^0.10.8.7"
 typing-extensions = "^4.9.0"
-yapf = ">=0.33,<0.41"
+yapf = "^0.40.2"
 
 [tool.poetry.group.docs]
 optional = true
 
 [tool.poetry.group.docs.dependencies]
+doc8 = "^1.1.1"
 docutils = "^0.20.1"
-esbonio = "^0.16.2"
+esbonio = "^0.16.3"
+restructuredtext-lint = "^1.4.0"
 sphinx = "^7.2.6"
+tomlkit = "^0.12.3"
+
+[tool.poetry.group.tests]
+optional = true
+
+[tool.poetry.group.tests.dependencies]
+coveralls = "^3.3.1"
+mock = "^5.1.0"
+pytest = "^7.4.3"
+pytest-cov = "^4.1.0"
+pytest-mock = "^3.12.0"
 
 [build-system]
 build-backend = "poetry.core.masonry.api"
 requires = ["poetry-core"]
+
+[tool.commitizen]
+tag_format = "v$version"
+version_files = ["README.md", "package.json"]
+version_provider = "poetry"
 
 [tool.cruft]
 skip = [
@@ -63,6 +90,9 @@ skip = [
   "node_modules/",
   "{{cookiecutter.directory_name}}/",
 ]
+
+[tool.doc8]
+max-line-length = 100
 
 [tool.mypy]
 disallow_incomplete_defs = true
@@ -184,9 +214,10 @@ inline-quotes = "single"
 multiline-quotes = "single"
 
 [tool.ruff.lint.isort]
-case-sensitive = true
-
 # from-first = true
+case-sensitive = true
+combine-as-imports = true
+
 [tool.yapf]
 align_closing_bracket_with_visual_indent = true
 allow_multiline_dictionary_keys = false

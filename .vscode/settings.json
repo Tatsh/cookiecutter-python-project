@@ -1,7 +1,6 @@
 {
   "[python]": {
     "editor.defaultFormatter": "eeyore.yapf",
-    "editor.formatOnSaveMode": "file",
     "editor.tabSize": 4
   },
   "cSpell.enabled": true,
@@ -9,6 +8,7 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnPaste": true,
   "editor.formatOnSave": true,
+  "editor.formatOnSaveMode": "file",
   "editor.formatOnType": true,
   "editor.inlayHints.enabled": "offUnlessPressed",
   "editor.insertSpaces": true,
@@ -55,7 +55,6 @@
   ],
   "python.analysis.stubPath": ".stubs",
   "python.analysis.typeCheckingMode": "strict",
-  "python.defaultInterpreterPath": "/usr/bin/python",
   "python.languageServer": "Pylance",
   "restructuredtext.linter.disabledLinters": ["rstcheck"],
   "restructuredtext.linter.doc8.extraArgs": ["--max-line-length", "100"],

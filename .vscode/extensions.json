@@ -28,6 +28,7 @@
     "richie5um2.vscode-sort-json",
     "ruiquelhas.vscode-lowercase",
     "ruiquelhas.vscode-uppercase",
+    "samuelcolvin.jinjahtml",
     "streetsidesoftware.code-spell-checker",
     "tcwalther.cython",
     "timonwong.shellcheck",
@@ -37,7 +38,6 @@
     "wmaurer.change-case",
     "zainchen.json",
     "zengxingxin.sort-js-object-keys",
-    "zeshuaro.vscode-python-poetry",
-    "samuelcolvin.jinjahtml"
+    "zeshuaro.vscode-python-poetry"
   ]
 }
