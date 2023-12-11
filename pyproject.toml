@@ -38,8 +38,31 @@ sphinx = "^7.2.6"
 build-backend = "poetry.core.masonry.api"
 requires = ["poetry-core"]
 
-[tool.poetry.scripts]
-check-project = "check_project:main"
+[tool.cruft]
+skip = [
+  "./*.lock",
+  "./.*_cache",
+  "./.git/hooks/*.sample",
+  "./docs/*.rst",
+  "./stubs/",
+  "./tests/*/test_*.py",
+  "./tests/test_*.py",
+  ".git/COMMIT_EDITMSG",
+  ".git/HEAD",
+  ".git/config",
+  ".git/index",
+  ".git/logs/",
+  ".git/refs/",
+  ".vscode/dictionary.txt",
+  "CHANGELOG.md",
+  "LICENSE.txt",
+  "dist/",
+  "hooks/",
+  "htmlcov/",
+  "man/",
+  "node_modules/",
+  "{{cookiecutter.directory_name}}/",
+]
 
 [tool.mypy]
 disallow_incomplete_defs = true
@@ -70,6 +93,7 @@ extend-select = [
   "ERA",
   "EXE",
   "G",
+  "I",
   "INP",
   "INT",
   "ISC003",
@@ -149,7 +173,7 @@ extend-select = [
   "TD",
   "TRY",
   "UP",
-  "YTT"
+  "YTT",
 ]
 line-length = 100
 target-version = "py311"

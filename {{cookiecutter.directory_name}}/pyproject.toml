@@ -55,6 +55,9 @@ version_provider = "poetry"
 [tool.cruft]
 skip = {{ cookiecutter.cruft_skip.list | sort(case_sensitive=True) | jsonify }}
 
+[tool.doc8]
+max-line-length = 100
+
 [tool.mypy]
 disallow_incomplete_defs = true
 disallow_untyped_calls = true
@@ -178,8 +181,9 @@ inline-quotes = "single"
 multiline-quotes = "single"
 
 [tool.ruff.lint.isort]
-case-sensitive = true
 # from-first = true
+case-sensitive = true
+combine-as-imports = true
 
 [tool.yapf]
 align_closing_bracket_with_visual_indent = true

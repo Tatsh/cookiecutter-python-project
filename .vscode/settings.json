@@ -15,6 +15,7 @@
   "editor.rulers": [100],
   "editor.tabSize": 2,
   "editor.wordWrapColumn": 100,
+  "esbonio.sphinx.confDir": "",
   "eslint.lintTask.enable": true,
   "files.associations": {
     "**/*cookiecutter.directory_name*/**/*.cfg": "jinja",
@@ -56,6 +57,9 @@
   "python.analysis.typeCheckingMode": "strict",
   "python.defaultInterpreterPath": "/usr/bin/python",
   "python.languageServer": "Pylance",
+  "restructuredtext.linter.disabledLinters": ["rstcheck"],
+  "restructuredtext.linter.doc8.extraArgs": ["--max-line-length", "100"],
+  "restructuredtext.linter.run": "onSave",
   "sortJSON.excludedFiles": ["cookiecutter.json"],
   "yaml.format.printWidth": 100
 }

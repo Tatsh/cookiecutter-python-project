@@ -12,6 +12,15 @@
     "prettier-plugin-toml": "^2.0.1"
   },
   "license": "MIT",
+  "markdownlint-cli2": {
+    "config": {
+      "default": true,
+      "line-length": {
+        "code_blocks": false,
+        "line_length": 100
+      }
+    }
+  },
   "name": "cookiecutter-python-project",
   "prettier": {
     "endOfLine": "lf",

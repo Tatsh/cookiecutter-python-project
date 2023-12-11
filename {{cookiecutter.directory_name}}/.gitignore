@@ -1,5 +1,7 @@
 *.pyc
 *.pyo
+*.swp
+*pgpass*
 .DS_Store
 .DS_Store?
 .Spotlight-V100/
