@@ -28,6 +28,7 @@
     ".doctrees",
     ".git",
     ".mypy_cache/",
+    "*cookiecutter.directory_name*/",
     ".pytest_cache/",
     ".vscode/extensions.json",
     "__pycache__",
