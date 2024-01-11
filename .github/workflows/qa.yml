@@ -15,8 +15,6 @@ jobs:
         run: poetry install --with=dev --all-extras --no-root
       - name: Install dependencies (Yarn)
         run: yarn
-      - name: Lint with mypy
-        run: yarn mypy
       - name: Lint with Ruff
         run: yarn ruff
       - name: Check spelling

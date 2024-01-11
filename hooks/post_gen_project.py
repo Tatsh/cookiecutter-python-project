@@ -1,7 +1,7 @@
-from pathlib import Path
 import re
 import subprocess as sp
 import sys
+from pathlib import Path
 from typing import cast
 
 MODULE_REGEX = r'^[_a-zA-Z][_a-zA-Z0-9]+$'

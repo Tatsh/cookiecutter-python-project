@@ -265,4 +265,4 @@ split_penalty_logical_operator = 300
 use_tabs = false
 
 [tool.yapfignore]
-ignore_patterns = ["node_modules/**"]
+ignore_patterns = ["*cookiecutter.*", "node_modules/**"]

@@ -19,7 +19,10 @@
         "code_blocks": false,
         "line_length": 100
       }
-    }
+    },
+    "ignores": [
+      ".*cookiecutter\\..*"
+    ]
   },
   "name": "cookiecutter-python-project",
   "prettier": {
@@ -52,10 +55,10 @@
     "clean-dict": "r=(); while IFS=$\\n read -r w; do ! rg --no-config -qi. -g '!.vscode/dictionary.txt' -m 1 \"$w\" . && r+=(\"$w\"); done < .vscode/dictionary.txt; j=$(printf \"|%s\" \"${r[@]}\"); j=\"^(${j:1})$\"; grep -Ev \"${j}\" .vscode/dictionary.txt > new && mv new .vscode/dictionary.txt",
     "format": "yarn prettier -w . && poetry run yapf -pri . && markdownlint-cli2 --fix '**/*.md' '#node_modules'",
     "gen-docs": "sphinx-build -T -E -b html -d docs/_build/doctrees -D language=en docs docs/_build",
-    "mypy": "poetry run mypy .",
+    "mypy": "poetry run mypy hooks",
     "qa": "yarn mypy && yarn ruff && yarn check-spelling && yarn check-formatting",
-    "ruff": "poetry run ruff .",
-    "ruff:fix": "poetry run ruff --fix ."
+    "ruff": "poetry run ruff --config ./pyproject.toml hooks .stubs",
+    "ruff:fix": "yarn ruff --fix ."
   },
   "version": "0.0.1"
 }

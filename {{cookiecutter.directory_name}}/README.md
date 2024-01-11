@@ -22,4 +22,5 @@ pip install {{cookiecutter.directory_name}}
 ```shell
 {{cookiecutter.main_cli_name}}
 ```
+
 {% endif %}
