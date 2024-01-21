@@ -181,9 +181,9 @@ inline-quotes = "single"
 multiline-quotes = "single"
 
 [tool.ruff.lint.isort]
-# from-first = true
 case-sensitive = true
 combine-as-imports = true
+from-first = true
 
 [tool.yapf]
 align_closing_bracket_with_visual_indent = true

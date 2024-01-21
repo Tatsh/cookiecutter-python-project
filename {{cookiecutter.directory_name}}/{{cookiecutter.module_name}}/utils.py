@@ -1,9 +1,12 @@
 """Utility functions."""
-from types import FrameType
 import logging
 import sys
+from typing import TYPE_CHECKING
 
 from loguru import logger
+
+if TYPE_CHECKING:
+    from types import FrameType
 
 __all__ = ('setup_logging',)
 

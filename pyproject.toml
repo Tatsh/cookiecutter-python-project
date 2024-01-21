@@ -74,11 +74,15 @@ skip = [
   "./stubs/",
   "./tests/*/test_*.py",
   "./tests/test_*.py",
+  ".git/*HEAD",
   ".git/COMMIT_EDITMSG",
-  ".git/HEAD",
   ".git/config",
+  ".git/description",
   ".git/index",
+  ".git/info/",
   ".git/logs/",
+  ".git/objects/",
+  ".git/packed-refs",
   ".git/refs/",
   ".vscode/dictionary.txt",
   "CHANGELOG.md",
@@ -113,7 +117,6 @@ warn_unused_ignores = true
 [tool.ruff]
 cache-dir = "~/.cache/ruff"
 extend-ignore = ["C408", "PTH123", "Q000", "Q001", "Q003", "T201", "TD002", "TD003", "TD004"]
-namespace-packages = ["hooks"]
 extend-select = [
   "A",
   "ASYNC",
@@ -206,6 +209,7 @@ extend-select = [
   "YTT",
 ]
 line-length = 100
+namespace-packages = ["hooks"]
 target-version = "py311"
 unsafe-fixes = true
 
@@ -214,7 +218,7 @@ inline-quotes = "single"
 multiline-quotes = "single"
 
 [tool.ruff.lint.isort]
-# from-first = true
+from-first = true
 case-sensitive = true
 combine-as-imports = true
 

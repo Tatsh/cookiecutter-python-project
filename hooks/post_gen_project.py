@@ -1,8 +1,7 @@
-import re
+from pathlib import Path  # noqa: INP001
+from typing import cast
 import subprocess as sp
 import sys
-from pathlib import Path
-from typing import cast
 
 MODULE_REGEX = r'^[_a-zA-Z][_a-zA-Z0-9]+$'
 REPO_URI = 'git@github.com:{{ cookiecutter.github_username }}/{{ cookiecutter.directory_name }}.git'
@@ -12,9 +11,6 @@ GIT_COMMAND_ARGS = (('init',), ('add', '.'), ('commit', '-m', 'Start of project'
 
 def main() -> int:
     module_name = '{{ cookiecutter.module_name }}'
-    if not re.match(MODULE_REGEX, module_name):
-        print(f'ERROR: {module_name} is not a valid Python module name!', file=sys.stderr)
-        return 1
     packages = cast(tuple[str, ...], tuple())
     dev_packages: tuple[str, ...] = ('commitizen', 'mypy', 'rope', 'ruff', 'yapf')
     docs_packages: tuple[str, ...] = ('doc8', 'docutils', 'esbonio', 'restructuredtext-lint',
@@ -39,12 +35,12 @@ def main() -> int:
     sp.run(('poetry', 'install', '--with=dev,docs,tests', '--all-extras'), check=True)
     sp.run(('yarn',), check=True)
     sp.run(('yarn', 'format'), check=True)
-    with open('.vscode/dictionary.txt') as f:
+    with Path('.vscode/dictionary.txt').open() as f:
         words = f.readlines()
-    words.append('{{ cookiecutter.module_name }}\n')
+    words.append(f'{module_name}\n')
     words.append('{{cookiecutter.directory_name}}\n')
     words.sort()
-    with open('.vscode/dictionary.txt', 'w') as f:
+    with Path('.vscode/dictionary.txt').open('w') as f:
         f.writelines(words)
     sp.run(('yarn', 'clean-dict'), check=True)
     for args in GIT_COMMAND_ARGS:
