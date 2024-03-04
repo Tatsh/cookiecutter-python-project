@@ -44,7 +44,7 @@ docutils = "^0.20.1"
 esbonio = "^0.16.4"
 restructuredtext-lint = "^1.4.0"
 sphinx = "^7.2.6"
-tomlkit = "^0.12.3"
+tomlkit = "^0.12.4"
 
 [tool.poetry.group.tests]
 optional = true
