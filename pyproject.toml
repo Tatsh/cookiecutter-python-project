@@ -39,7 +39,7 @@ yapf = "^0.40.2"
 optional = true
 
 [tool.poetry.group.docs.dependencies]
-doc8 = "^1.1.1"
+doc8 = "^1.1.2"
 docutils = "^0.20.1"
 esbonio = "^0.16.4"
 restructuredtext-lint = "^1.4.0"
