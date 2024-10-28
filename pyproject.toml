@@ -27,7 +27,7 @@ python = ">=3.11,<4"
 optional = true
 
 [tool.poetry.group.dev.dependencies]
-commitizen = "^3.29.0"
+commitizen = "^3.30.0"
 djlint = "^1.35.2"
 mypy = "^1.12.1"
 rope = "^1.13.0"
