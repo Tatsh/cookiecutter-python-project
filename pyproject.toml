@@ -31,7 +31,7 @@ commitizen = "^4.1.0"
 djlint = "^1.36.3"
 mypy = "^1.13.0"
 rope = "^1.13.0"
-ruff = "^0.8.3"
+ruff = "^0.8.4"
 typing-extensions = "^4.12.2"
 yapf = "^0.43.0"
 
